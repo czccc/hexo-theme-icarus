@@ -26,9 +26,9 @@ function buildToc(toc) {
     return result;
 }
 %>
-<div class="card widget" id="toc">
+<div class="card widget column-left is-sticky" id="toc">
     <div class="card-content">
-        <div class="menu" style="max-height: 400px; overflow: auto;">
+        <div class="menu" style="max-height: calc(100vh - 5rem); overflow-y: auto;">
             <h3 class="menu-label">
                 <%= _p('widget.catalogue', Infinity) %>
             </h3>
