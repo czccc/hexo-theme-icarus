@@ -336,7 +336,7 @@ img.thumbnail
  * --------------------------------- */
 .content
     h1, h2, h3, h4, h5, h6
-        font-weight: 400
+        font-weight: 500
     h1
         font-size: 1.75em
     h2
@@ -358,6 +358,14 @@ img.thumbnail
         footer
             strong + cite
                 margin-left: 0.5em
+
+.content {counter-reset:section}
+.content h1{counter-reset:sub-section}
+.content h2{counter-reset:composite}
+.content h3{counter-reset:detail}
+.content h1:before{content:counter(section) "  ";counter-increment:section}
+.content h2:before{content:counter(section) "." counter(sub-section) "  ";counter-increment:sub-section}
+.content h3:before{content:counter(section) "." counter(sub-section) "." counter(composite) "  ";counter-increment:composite}
 
 /* ---------------------------------
  *        Fix code highlight
