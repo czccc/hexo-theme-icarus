@@ -1,5 +1,5 @@
 <div class="card">
-    <% if (has_thumbnail(post)) { %>
+    <% if (has_thumbnail(post) && is_post()) { %>
     <div class="card-image">
         <%- index ? '<a href="' + url_for(post.link ? post.link : post.path) + '"' : '<span ' %> class="image is-7by1">
             <img class="thumbnail" src="<%= get_thumbnail(post) %>" alt="<%= post.title %>">
@@ -27,6 +27,7 @@
                 <% } %>
                 <% if (post.categories && post.categories.length) { %>
                 <div class="level-item">
+                <i class="far fa-folder">&nbsp;</i>
                 <%- list_categories(post.categories, {
                     class: 'has-link-grey ',
                     show_count: false,
@@ -37,6 +38,7 @@
                 <% } %>
                 <% if (!has_config('article.readtime') || get_config('article.readtime') === true) { %>
                 <span class="level-item has-text-grey">
+                    <i class="far fa-hourglass">&nbsp;&nbsp;</i>
                     <% const words = word_count(post._content); %>
                     <% const time = duration((words / 150.0) * 60, 'seconds') %>
                     <%= `${ time.locale(get_config('language', 'en')).humanize() } ${ __('article.read')} (${ __('article.about') } ${ words } ${ __('article.words') })` %>
@@ -90,7 +92,7 @@
         <div class="level is-mobile">
             <div class="level-start">
                 <div class="level-item">
-                <a class="button is-size-7 is-light" href="<%- url_for(post.path) %>#more"><%= __('article.more') %></a>
+                <a class="button is-size-7 is-light" href="<%- url_for(post.path) %>#more"><%= __('article.more') %>&nbsp;&nbsp;<i class="fas fa-caret-right"></i></a>
                 </div>
             </div>
         </div>

@@ -8,11 +8,13 @@
         <% site.posts.sort('date', -1).limit(5).each(post => { %>
         <article class="media">
             <% if (!has_config('article.thumbnail') || get_config('article.thumbnail') !== false) { %>
-            <a href="<%- url_for((post.link?post.link:post.path)) %>" class="media-left">
-                <p class="image is-64x64">
-                    <img class="thumbnail" src="<%= get_thumbnail(post) %>" alt="<%= post.title %>">
-                </p>
-            </a>
+                <% if (has_thumbnail(post)) { %>
+                    <a href="<%- url_for((post.link?post.link:post.path)) %>" class="media-left">
+                        <p class="image is-64x64">
+                            <img class="thumbnail" src="<%= get_thumbnail(post) %>" alt="<%= post.title %>">
+                        </p>
+                    </a>
+                <% } %>
             <% } %>
             <div class="media-content">
                 <div class="content">
