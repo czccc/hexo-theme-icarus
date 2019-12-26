@@ -1,5 +1,4 @@
 <% if (page.__page !== true && page.__post !== true) { %>
-<% if (site.posts.length) { %>
 <div class="card widget">
     <div class="card-content">
         <h3 class="menu-label">
@@ -7,14 +6,12 @@
         </h3>
         <% posts.forEach(post => { %>
         <article class="media">
-            <% if (!has_config('article.thumbnail') || get_config('article.thumbnail') !== false) { %>
-            <% if (has_thumbnail(post)) { %>
-            <a href="<%- url_for((post.link?post.link:post.path)) %>" class="media-left">
+            <% if (thumbnail) { %>
+            <a href="<%- url_for(post.link ? post.link : post.path) %>" class="media-left">
                 <p class="image is-64x64">
-                    <img class="thumbnail" src="<%= get_thumbnail(post) %>" alt="<%= post.title %>">
+                    <img class="thumbnail" src="<%= post.thumbnail %>" alt="<%= post.title %>">
                 </p>
             </a>
-            <% } %>
             <% } %>
             <div class="media-content">
                 <div class="content">
@@ -36,5 +33,4 @@
         <% }) %>
     </div>
 </div>
-<% } %>
 <% } %>

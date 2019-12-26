@@ -1,6 +1,4 @@
 <% if (page.__page !== true && page.__post !== true) { %>
-<% const links = get_config_from_obj(widget, 'links'); %>
-<% if (links !== null) { %>
 <div class="card widget">
     <div class="card-content">
         <div class="menu">
@@ -10,7 +8,7 @@
             <ul class="menu-list">
                 <% for (let i in links) { %>
                 <li>
-                    <a class="level is-mobile" href="<%- links[i] %>" target="_blank">
+                    <a class="level is-mobile" href="<%- links[i] %>" target="_blank" rel="noopener">
                         <span class="level-left">
                             <span class="level-item"><%= i %></span>
                         </span>
@@ -24,5 +22,4 @@
         </div>
     </div>
 </div>
-<% } %>
 <% } %>
