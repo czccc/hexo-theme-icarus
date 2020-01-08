@@ -35,6 +35,7 @@ navbar:
         Archives: /archives
         Categories: /categories
         Tags: /tags
+        LeetCode : /categories/LeetCode
         About: /about
     # Navigation bar links to be shown on the right
     links:
