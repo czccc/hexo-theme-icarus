@@ -60,6 +60,30 @@ module.exports = function (hexo) {
         return this.url_for(hasThumbnail ? post.thumbnail : 'images/thumbnail.svg');
     });
 
+    hexo.extend.helper.register('get_archive', function (archive) {
+        const name = archive.name;
+        const length = name.length;
+        return name.slice(length - 4, length) + "\t" + name.slice(0, length - 4);
+    });
+
+    hexo.extend.helper.register('has_random_recent_thumbnail', function (post) {
+        const getConfig = hexo.extend.helper.get('get_config').bind(this);
+        return getConfig('article.random_recent_thumbnail', true);
+    });
+
+    hexo.extend.helper.register('get_random_recent_thumbnail', function (post) {
+        const hasThumbnail = hexo.extend.helper.get('has_thumbnail').bind(this)(post);
+        if (hasThumbnail) {
+            return this.url_for(post.thumbnail);
+        }
+        const autothubnail = hexo.extend.helper.get('has_random_recent_thumbnail').bind(this)(post);
+        var url = "images/thumbnail.svg";
+        if (autothubnail) {
+            url = "images/random/icon (" + Math.floor(Math.random() * 20 + 1) + ").svg";
+        }
+        return this.url_for(url);
+    });
+
     hexo.extend.helper.register('has_og_image', function (post) {
         return post.hasOwnProperty('og_image');
     });
