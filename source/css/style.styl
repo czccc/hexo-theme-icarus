@@ -1,5 +1,5 @@
-family-sans = "Noto Sans CJK Regular", sans-serif, "Ubuntu", "Roboto", "Open Sans", "Microsoft YaHei"
-family-mono = "Fira Code Retina", "Fira Code", "Noto Mono", "Source Code Pro", monospace, "Microsoft YaHei"
+family-sans = "Optima Medium", "Noto Sans CJK Regular", sans-serif, "Ubuntu", "Roboto", "Open Sans", "Microsoft YaHei"
+family-mono = "Fira Code Retina", "Fira Code", "Noto Mono", "Source Code Pro", "Noto Sans CJK Regular", "Microsoft YaHei", monospace
 gap = 64px
 screen-tablet = 769px
 screen-desktop = 1088px
@@ -10,7 +10,7 @@ screen-fullhd = 1472px
  *       Override CSS Framework
  * --------------------------------- */
 html
-    font-size: 14px
+    font-size: 15px
 
 body
     background-color: #f7f7f7
@@ -369,9 +369,9 @@ img.thumbnail
 .content h1{counter-reset:sub-section}
 .content h2{counter-reset:composite}
 .content h3{counter-reset:detail}
-.content h1:before{content:counter(section) ".  ";counter-increment:section}
-.content h2:before{content:counter(section) "." counter(sub-section) ".  ";counter-increment:sub-section}
-.content h3:before{content:counter(section) "." counter(sub-section) "." counter(composite) ".  ";counter-increment:composite}
+.content h1:before{content:counter(section) ".  ";counter-increment:section;font-family:family-sans}
+.content h2:before{content:counter(section) "." counter(sub-section) ".  ";counter-increment:sub-section;font-family:family-sans}
+.content h3:before{content:counter(section) "." counter(sub-section) "." counter(composite) ".  ";counter-increment:composite;font-family:family-sans}
 
 /* ---------------------------------
  *        Fix code highlight
