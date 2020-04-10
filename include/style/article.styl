@@ -100,3 +100,11 @@ article
         left: 0
         width: 100%
         height: 100%
+
+.content {counter-reset:section}
+.content h1{counter-reset:sub-section}
+.content h2{counter-reset:composite}
+.content h3{counter-reset:detail}
+.content h1:before{content:counter(section) ".  ";counter-increment:section;font-family:$family-sans-serif}
+.content h2:before{content:counter(section) "." counter(sub-section) ".  ";counter-increment:sub-section;font-family:$family-sans-serif}
+.content h3:before{content:counter(section) "." counter(sub-section) "." counter(composite) ".  ";counter-increment:composite;font-family:$family-sans-serif}
