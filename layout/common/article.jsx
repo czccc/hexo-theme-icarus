@@ -33,16 +33,25 @@ module.exports = class extends Component {
                     {index ? <a href={url_for(page.link || page.path)} class="image is-7by3">
                         <img class="thumbnail" src={get_thumbnail(page)} alt={page.title || get_thumbnail(page)} />
                     </a> : <span class="image is-7by3">
-                        <img class="thumbnail" src={get_thumbnail(page)} alt={page.title || get_thumbnail(page)} />
-                    </span>}
+                            <img class="thumbnail" src={get_thumbnail(page)} alt={page.title || get_thumbnail(page)} />
+                        </span>}
                 </div> : null}
                 {/* Metadata */}
                 <article class={`card-content article${'direction' in page ? ' ' + page.direction : ''}`} role="article">
+                    {/* Title */}
+                    <h1 class="title is-3 is-size-4-mobile">
+                        <i class="fas fa-angle-double-right"></i>&nbsp;&nbsp;
+                        {index ? <a class="link-muted" href={url_for(page.link || page.path)}>{page.title}</a> : page.title}
+                    </h1>
                     {page.layout !== 'page' ? <div class="article-meta size-small is-uppercase level is-mobile">
                         <div class="level-left">
                             {/* Date */}
+                            <i class="far fa-calendar-alt">&nbsp;</i>
                             <time class="level-item" dateTime={date_xml(page.date)} title={date_xml(page.date)}>{date(page.date)}</time>
+                            <i class="far fa-calendar-check">&nbsp;</i>
+                            <time class="level-item" dateTime={date_xml(page.updated)} title={date_xml(page.date)}>{date(page.updated)}</time>
                             {/* Categories */}
+                            <i class="far fa-folder">&nbsp;</i>
                             {page.categories && page.categories.length ? <span class="level-item">
                                 {(() => {
                                     const categories = [];
@@ -56,6 +65,7 @@ module.exports = class extends Component {
                                 })()}
                             </span> : null}
                             {/* Read time */}
+                            <i class="far fa-hourglass">&nbsp;&nbsp;</i>
                             {article && article.readtime && article.readtime === true ? <span class="level-item">
                                 {(() => {
                                     const words = getWordCount(page._content);
@@ -64,17 +74,24 @@ module.exports = class extends Component {
                                 })()}
                             </span> : null}
                             {/* Visitor counter */}
+                            {!index && plugins && plugins.busuanzi === true ? <i class="far fa-eye"></i> : null}
                             {!index && plugins && plugins.busuanzi === true ? <span class="level-item" id="busuanzi_container_page_pv" dangerouslySetInnerHTML={{
                                 __html: '<i class="far fa-eye"></i>' + _p('plugin.visit', '&nbsp;&nbsp;<span id="busuanzi_value_page_pv">0</span>')
                             }}></span> : null}
                         </div>
                     </div> : null}
-                    {/* Title */}
-                    <h1 class="title is-3 is-size-4-mobile">
-                        {index ? <a class="link-muted" href={url_for(page.link || page.path)}>{page.title}</a> : page.title}
-                    </h1>
                     {/* Content/Excerpt */}
                     <div class="content" dangerouslySetInnerHTML={{ __html: index && page.excerpt ? page.excerpt : page.content }}></div>
+                    {!index && page.layout !== 'page' ?
+                        <ul class="post-copyright">
+                            <li><strong>本文标题：</strong><a href={url_for(page.permalink)}>{page.title}</a></li>
+                            <li><strong>本文作者：</strong><a href={url_for('/')}>{config.author}</a></li>
+                            <li><strong>本文链接：</strong><a href={url_for(page.permalink)}>{page.permalink}</a></li>
+                            <li><strong>发布时间：</strong>{page.date.format("YYYY-MM-DD")}</li>
+                            <li><strong>版权声明：</strong>本博客所有文章除特别声明外，均采用 <a href="https://creativecommons.org/licenses/by-nc-sa/4.0/deed.zh" rel="external nofollow" target="_blank">CC BY-NC-SA 4.0</a> 许可协议。转载请注明出处！</li>
+                        </ul> : null
+                    }
+                    <br></br>
                     {/* Tags */}
                     {!index && page.tags && page.tags.length ? <div class="article-tags size-small is-uppercase mb-4">
                         <span class="mr-2">#</span>
@@ -83,7 +100,7 @@ module.exports = class extends Component {
                         })}
                     </div> : null}
                     {/* "Read more" button */}
-                    {index && page.excerpt ? <a class="article-more button is-small size-small" href={`${url_for(page.path)}#more`}>{__('article.more')}</a> : null}
+                    {index && page.excerpt ? <a class="article-more button is-small size-small" href={`${url_for(page.path)}#more`}>{__('article.more')}&nbsp;&nbsp;<i class="fas fa-caret-right"></i></a> : null}
                     {/* Share button */}
                     {!index ? <Share config={config} page={page} helper={helper} /> : null}
                 </article>
